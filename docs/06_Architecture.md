@@ -31,7 +31,30 @@ React Frontend will communicate with the Spring Boot backend using REST APIs.
 - AI service for project summaries
 
 ## Current Backend Modules
+
 - User Management Module
+- Project Management Module
+- Task Management Module
+- Authentication Module (JWT + BCrypt)
+
+## Authentication Flow
+
+User
+  |
+  v
+Login API
+  |
+  v
+User Repository
+  |
+  v
+BCrypt Password Verification
+  |
+  v
+JWT Token Generation
+  |
+  v
+Client Receives Token
 
 ## Planned Backend Modules
 - Project Management Module

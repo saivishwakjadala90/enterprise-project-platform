@@ -27,10 +27,12 @@
 - Add comments
 
 ## Sprint 4: Authentication & Security
-- Add password encryption
-- Create login API
-- Generate JWT token
-- Add role-based access
+
+✅ Add password encryption
+✅ Create login API
+✅ Generate JWT token
+⏳ Add role-based access
+⏳ Secure APIs using JWT filter
 
 ## Sprint 5: Dashboard & Reports
 - Project count
