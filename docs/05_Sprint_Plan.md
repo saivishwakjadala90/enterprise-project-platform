@@ -1,6 +1,7 @@
 # Sprint Plan
 
-## Sprint 1: Project Foundation
+## Sprint 1: Project Foundation ✅ COMPLETED
+
 - GitHub repository setup
 - Documentation structure
 - Spring Boot backend setup
@@ -8,11 +9,16 @@
 - User entity, repository, and REST controller
 - User API tested successfully
 
-## Sprint 2: Project Management
-- Create Project entity
-- Create Project repository
-- Create Project controller
-- Add create, read, update, delete APIs
+## Sprint 2: Project Management ✅ COMPLETED
+
+- Project entity
+- Project repository
+- Project controller
+- Create Project API
+- Get Projects API
+- Get Project By ID API
+- Update Project API
+- Delete Project API
 
 ## Sprint 3: Task Management
 - Create Task entity
