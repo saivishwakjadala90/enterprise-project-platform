@@ -12,6 +12,9 @@
 * Task Management CRUD APIs
 * Comments & Collaboration Module
 * Activity Logs & Audit Trail
+* Notifications Module
+* User-Specific Notifications
+* Read/Unread Notification Status
 * API Testing using Postman
 * Documentation Suite
 * GitHub Integration
@@ -61,24 +64,32 @@
 * Audit Trail
 * User Activity Tracking
 
+✅ Sprint 6 - Notifications
+
+* Notification Entity
+* Notification Repository
+* Notification Controller
+* User Notifications
+* Read/Unread Status
+* Notification APIs
+
 ---
 
 ### Current Sprint
 
-🚧 Sprint 6 - Notifications
+🚧 Sprint 7 - Role-Based Access Control (RBAC)
 
 Planned:
 
-* Task Assignment Notifications
-* Task Status Change Notifications
-* Due Date Alerts
-* Project Notifications
+* ADMIN Role
+* MANAGER Role
+* EMPLOYEE Role
+* Endpoint Security Rules
+* Access Control Policies
 
 ---
 
 ### Upcoming Sprints
-
-📌 Role-Based Access Control (ADMIN / MANAGER / EMPLOYEE)
 
 📌 Dashboard & Reporting
 
@@ -126,11 +137,27 @@ DELETE /api/activity-logs/{id}
 
 ---
 
+### Notifications
+
+POST /api/notifications
+
+GET /api/notifications
+
+GET /api/notifications/{id}
+
+GET /api/notifications/user/{email}
+
+PUT /api/notifications/{id}/read
+
+DELETE /api/notifications/{id}
+
+---
+
 ## Version
 
 Current Version:
 
-v0.8
+v0.9
 
 ---
 
@@ -146,7 +173,7 @@ v0.8
 
 ✅ Activity Logs
 
-🚧 Notifications
+✅ Notifications
 
 🚧 Role-Based Access Control
 
