@@ -2,6 +2,7 @@ package com.company.project_platform.controller;
 
 import com.company.project_platform.entity.Project;
 import com.company.project_platform.repository.ProjectRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,21 +18,25 @@ public class ProjectController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public Project createProject(@RequestBody Project project) {
         return projectRepository.save(project);
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
     public Project getProjectById(@PathVariable Long id) {
         return projectRepository.findById(id).orElse(null);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public Project updateProject(@PathVariable Long id, @RequestBody Project updatedProject) {
         return projectRepository.findById(id).map(project -> {
             project.setProjectName(updatedProject.getProjectName());
@@ -46,6 +51,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteProject(@PathVariable Long id) {
         projectRepository.deleteById(id);
         return "Project deleted successfully";

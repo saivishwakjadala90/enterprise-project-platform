@@ -2,6 +2,7 @@ package com.company.project_platform.controller;
 
 import com.company.project_platform.entity.Task;
 import com.company.project_platform.repository.TaskRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,21 +18,25 @@ public class TaskController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public Task createTask(@RequestBody Task task) {
         return taskRepository.save(task);
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
     public Task getTaskById(@PathVariable Long id) {
         return taskRepository.findById(id).orElse(null);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
         return taskRepository.findById(id).map(task -> {
             task.setTaskName(updatedTask.getTaskName());
@@ -46,6 +51,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteTask(@PathVariable Long id) {
         taskRepository.deleteById(id);
         return "Task deleted successfully";
