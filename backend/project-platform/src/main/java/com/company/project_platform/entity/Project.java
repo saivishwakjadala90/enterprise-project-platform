@@ -12,17 +12,11 @@ public class Project {
     private Long id;
 
     private String projectName;
-
     private String description;
-
     private String status;
-
     private String priority;
-
-    private String managerName;
-
+    private String ownerEmail;
     private LocalDate startDate;
-
     private LocalDate endDate;
 
     public Project() {
@@ -48,8 +42,8 @@ public class Project {
         return priority;
     }
 
-    public String getManagerName() {
-        return managerName;
+    public String getOwnerEmail() {
+        return ownerEmail;
     }
 
     public LocalDate getStartDate() {
@@ -80,8 +74,8 @@ public class Project {
         this.priority = priority;
     }
 
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
     }
 
     public void setStartDate(LocalDate startDate) {

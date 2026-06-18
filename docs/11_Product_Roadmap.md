@@ -35,7 +35,7 @@ Duration: 3 Days
 * Project Ownership
 * Project Status Tracking
 
-Status: ⏳ Planned
+Status: ✅ Completed
 
 ---
 
@@ -51,7 +51,7 @@ Duration: 3 Days
 * Priority Management
 * Due Dates
 
-Status: ⏳ Planned
+Status: ✅ Completed
 
 ---
 

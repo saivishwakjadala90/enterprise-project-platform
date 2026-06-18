@@ -1,56 +1,64 @@
-# Project Platform
+# Enterprise AI Delivery Operating System
 
-A Spring Boot based Project Management Platform with JWT Authentication and Role-Based Access Control.
+A Spring Boot based Enterprise Project Management Platform with JWT Authentication, Task Management, Project Management, and AI-powered delivery insights.
 
 ## Features
 
-- User Registration
-- User Login
-- BCrypt Password Encryption
-- JWT Authentication
-- Protected REST APIs
-- Role-Based Access Control
-- MySQL Database Integration
-- API Testing using Postman
+### Completed Features
+
+* User Registration
+* User Login
+* BCrypt Password Encryption
+* JWT Authentication
+* JWT Authorization
+* Protected REST APIs
+* Project Management CRUD APIs
+* Task Management CRUD APIs
+* API Testing using Postman
+* Documentation Suite
+* GitHub Integration
 
 ---
 
 ## Tech Stack
 
 ### Backend
-- Java 17
-- Spring Boot
-- Spring Security
-- Spring Data JPA
-- JWT
+
+* Java 21
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* JWT
 
 ### Database
-- MySQL
+
+* H2 Database (Development)
+* PostgreSQL (Planned)
 
 ### Tools
-- Maven
-- IntelliJ IDEA
-- Postman
-- Git & GitHub
+
+* Maven
+* IntelliJ IDEA
+* Postman
+* Git
+* GitHub
 
 ---
 
 ## Project Structure
 
-```
-project-platform
+```text
+Enterprise-Project-Platform
 │
-├── src
-│   ├── controller
-│   ├── entity
-│   ├── repository
-│   ├── security
-│   └── config
+├── backend
+│   └── project-platform
+│       ├── src
+│       ├── pom.xml
+│       └── README.md
 │
 ├── docs
 │
-├── pom.xml
-└── README.md
+└── frontend (Planned)
 ```
 
 ---
@@ -69,11 +77,13 @@ project-platform
 
 ## API Endpoints
 
-### Register User
+### Authentication
+
+#### Register User
 
 POST
 
-```
+```text
 /api/auth/register
 ```
 
@@ -90,11 +100,11 @@ Request Body
 
 ---
 
-### Login
+#### Login
 
 POST
 
-```
+```text
 /api/auth/login
 ```
 
@@ -120,57 +130,157 @@ Response
 
 ---
 
-### Get Users
+### Users
+
+#### Get All Users
 
 GET
 
-```
+```text
 /api/users
 ```
 
 Header
 
-```
+```text
 Authorization: Bearer JWT_TOKEN
+```
+
+---
+
+### Projects
+
+#### Create Project
+
+POST
+
+```text
+/api/projects
+```
+
+#### Get All Projects
+
+GET
+
+```text
+/api/projects
+```
+
+#### Get Project By Id
+
+GET
+
+```text
+/api/projects/{id}
+```
+
+#### Update Project
+
+PUT
+
+```text
+/api/projects/{id}
+```
+
+#### Delete Project
+
+DELETE
+
+```text
+/api/projects/{id}
+```
+
+---
+
+### Tasks
+
+#### Create Task
+
+POST
+
+```text
+/api/tasks
+```
+
+#### Get All Tasks
+
+GET
+
+```text
+/api/tasks
+```
+
+#### Get Task By Id
+
+GET
+
+```text
+/api/tasks/{id}
+```
+
+#### Update Task
+
+PUT
+
+```text
+/api/tasks/{id}
+```
+
+#### Delete Task
+
+DELETE
+
+```text
+/api/tasks/{id}
 ```
 
 ---
 
 ## Security
 
-- BCrypt Password Encryption
-- JWT Token Validation
-- Protected API Endpoints
-- Unauthorized Requests Blocked
+* BCrypt Password Encryption
+* JWT Token Generation
+* JWT Token Validation
+* Protected Endpoints
+* Unauthorized Request Blocking
 
 ---
 
 ## Documentation
 
-Project documents are available in the `/docs` folder:
+Documentation is available under:
 
-- Project Charter
-- Business Requirements
-- Functional Requirements
-- User Stories
-- Sprint Plan
-- Architecture
-- API Specification
-- Database Design
-- Risk Register
-- Deployment Guide
+```text
+/docs
+```
+
+Documents:
+
+* Project Charter
+* Business Requirements
+* Functional Requirements
+* User Stories
+* Sprint Plan
+* Architecture
+* API Specification
+* Database Design
+* Risk Register
+* Deployment Guide
+* Product Roadmap
+* Daily Task Plan
+* Team Onboarding Guide
 
 ---
 
 ## Running the Application
 
-Clone the repository
+Clone Repository
 
 ```bash
 git clone <repository-url>
 ```
 
-Run the application
+Run Application
 
 ```bash
 mvn spring-boot:run
@@ -178,7 +288,7 @@ mvn spring-boot:run
 
 Application URL
 
-```
+```text
 http://localhost:8080
 ```
 
@@ -186,18 +296,74 @@ http://localhost:8080
 
 ## Current Status
 
-✅ User Management
+### Completed Sprints
 
-✅ Authentication & Security
+✅ Sprint 1 - Foundation & Security
 
-✅ JWT Token Generation
+* User Management
+* Authentication
+* BCrypt Encryption
+* JWT Security
+* Protected APIs
 
-✅ Protected APIs
+✅ Sprint 2 - Project Management
 
-✅ Documentation Complete
+* Project Entity
+* Project Repository
+* Project CRUD APIs
 
-🚧 Project Management Module (Upcoming)
+✅ Sprint 3 - Task Management
 
-🚧 Task Management Module (Upcoming)
+* Task Entity
+* Task Repository
+* Task CRUD APIs
 
-🚧 Dashboard & Reporting (Upcoming)
+---
+
+### Current Sprint
+
+🚧 Sprint 7 - Comments & Collaboration Module
+
+Planned:
+
+* Task Comments
+* Project Discussions
+* Collaboration Features
+
+---
+
+### Upcoming Sprints
+
+📌 Activity Logs
+
+📌 Notifications
+
+📌 Dashboard & Reporting
+
+📌 Role-Based Access Control
+
+📌 React Frontend
+
+📌 AI Copilot
+
+📌 Docker Deployment
+
+📌 AWS Deployment
+
+📌 CI/CD Pipeline
+
+---
+
+## Version
+
+Current Version:
+
+```text
+v0.6
+```
+
+---
+
+## Author
+
+Saivishwak Jadala
