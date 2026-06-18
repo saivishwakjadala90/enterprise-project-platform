@@ -15,6 +15,8 @@
 * Notifications Module
 * User-Specific Notifications
 * Read/Unread Notification Status
+* Role-Based Access Control (RBAC)
+* ADMIN / MANAGER / EMPLOYEE Roles
 * API Testing using Postman
 * Documentation Suite
 * GitHub Integration
@@ -73,25 +75,36 @@
 * Read/Unread Status
 * Notification APIs
 
----
-
-### Current Sprint
-
-🚧 Sprint 7 - Role-Based Access Control (RBAC)
-
-Planned:
+✅ Sprint 7 - Role-Based Access Control
 
 * ADMIN Role
 * MANAGER Role
 * EMPLOYEE Role
-* Endpoint Security Rules
-* Access Control Policies
+* Method Security
+* Endpoint Authorization
+* Project RBAC
+* Task RBAC
+* Comment RBAC
+* Notification RBAC
+* Activity Log RBAC
+
+---
+
+### Current Sprint
+
+🚧 Sprint 8 - Dashboard & Reporting
+
+Planned:
+
+* Project Dashboard
+* Task Dashboard
+* KPI Metrics
+* Team Performance Metrics
+* Delivery Analytics
 
 ---
 
 ### Upcoming Sprints
-
-📌 Dashboard & Reporting
 
 📌 React Frontend
 
@@ -110,6 +123,50 @@ Planned:
 ---
 
 ## API Endpoints
+
+### Authentication
+
+POST /api/auth/register
+
+POST /api/auth/login
+
+---
+
+### Users
+
+POST /api/users
+
+GET /api/users
+
+---
+
+### Projects
+
+POST /api/projects
+
+GET /api/projects
+
+GET /api/projects/{id}
+
+PUT /api/projects/{id}
+
+DELETE /api/projects/{id}
+
+---
+
+### Tasks
+
+POST /api/tasks
+
+GET /api/tasks
+
+GET /api/tasks/{id}
+
+PUT /api/tasks/{id}
+
+DELETE /api/tasks/{id}
+
+---
 
 ### Comments
 
@@ -157,7 +214,7 @@ DELETE /api/notifications/{id}
 
 Current Version:
 
-v0.9
+v1.0
 
 ---
 
@@ -175,7 +232,7 @@ v0.9
 
 ✅ Notifications
 
-🚧 Role-Based Access Control
+✅ Role-Based Access Control
 
 🚧 Dashboard & Reporting
 

@@ -92,6 +92,9 @@ Status: ✅ Completed
 
 Status: ✅ Completed
 
+RBAC Sprint
+Status: ✅ Completed
+
 ---
 
 ## Week 5 - Dashboard & Reporting

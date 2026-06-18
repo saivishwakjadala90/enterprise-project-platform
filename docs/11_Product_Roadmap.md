@@ -94,7 +94,7 @@ Duration: 3 Days
 * MANAGER
 * EMPLOYEE
 
-Status: ⏳ Planned
+Status: ✅ Completed
 
 ---
 

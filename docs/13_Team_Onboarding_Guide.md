@@ -151,6 +151,14 @@ Create Pull Request.
 
 ---
 
+Roles Available:
+
+ADMIN
+MANAGER
+EMPLOYEE
+
+Access is controlled using Spring Security RBAC and JWT roles.
+
 ## Current Status
 
 Completed:
