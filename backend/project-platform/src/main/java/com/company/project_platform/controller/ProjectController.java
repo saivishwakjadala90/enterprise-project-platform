@@ -38,7 +38,7 @@ public class ProjectController {
             project.setDescription(updatedProject.getDescription());
             project.setStatus(updatedProject.getStatus());
             project.setPriority(updatedProject.getPriority());
-            project.setManagerName(updatedProject.getManagerName());
+            project.setOwnerEmail(updatedProject.getOwnerEmail());
             project.setStartDate(updatedProject.getStartDate());
             project.setEndDate(updatedProject.getEndDate());
             return projectRepository.save(project);
