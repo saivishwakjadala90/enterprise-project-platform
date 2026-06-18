@@ -1,7 +1,3 @@
-# Enterprise AI Delivery Operating System
-
-A Spring Boot based Enterprise Project Management Platform with JWT Authentication, Task Management, Project Management, and AI-powered delivery insights.
-
 ## Features
 
 ### Completed Features
@@ -14,283 +10,11 @@ A Spring Boot based Enterprise Project Management Platform with JWT Authenticati
 * Protected REST APIs
 * Project Management CRUD APIs
 * Task Management CRUD APIs
+* Comments & Collaboration Module
+* Activity Logs & Audit Trail
 * API Testing using Postman
 * Documentation Suite
 * GitHub Integration
-
----
-
-## Tech Stack
-
-### Backend
-
-* Java 21
-* Spring Boot
-* Spring Security
-* Spring Data JPA
-* JWT
-
-### Database
-
-* H2 Database (Development)
-* PostgreSQL (Planned)
-
-### Tools
-
-* Maven
-* IntelliJ IDEA
-* Postman
-* Git
-* GitHub
-
----
-
-## Project Structure
-
-```text
-Enterprise-Project-Platform
-│
-├── backend
-│   └── project-platform
-│       ├── src
-│       ├── pom.xml
-│       └── README.md
-│
-├── docs
-│
-└── frontend (Planned)
-```
-
----
-
-## Authentication Flow
-
-1. User registers
-2. Password is encrypted using BCrypt
-3. User logs in
-4. JWT token is generated
-5. JWT token is sent in Authorization header
-6. Protected APIs validate the JWT token
-7. Authorized users receive access
-
----
-
-## API Endpoints
-
-### Authentication
-
-#### Register User
-
-POST
-
-```text
-/api/auth/register
-```
-
-Request Body
-
-```json
-{
-  "name": "Admin User",
-  "email": "admin@test.com",
-  "password": "admin123",
-  "role": "ADMIN"
-}
-```
-
----
-
-#### Login
-
-POST
-
-```text
-/api/auth/login
-```
-
-Request Body
-
-```json
-{
-  "email": "admin@test.com",
-  "password": "admin123"
-}
-```
-
-Response
-
-```json
-{
-  "message": "Login successful",
-  "email": "admin@test.com",
-  "role": "ADMIN",
-  "token": "JWT_TOKEN"
-}
-```
-
----
-
-### Users
-
-#### Get All Users
-
-GET
-
-```text
-/api/users
-```
-
-Header
-
-```text
-Authorization: Bearer JWT_TOKEN
-```
-
----
-
-### Projects
-
-#### Create Project
-
-POST
-
-```text
-/api/projects
-```
-
-#### Get All Projects
-
-GET
-
-```text
-/api/projects
-```
-
-#### Get Project By Id
-
-GET
-
-```text
-/api/projects/{id}
-```
-
-#### Update Project
-
-PUT
-
-```text
-/api/projects/{id}
-```
-
-#### Delete Project
-
-DELETE
-
-```text
-/api/projects/{id}
-```
-
----
-
-### Tasks
-
-#### Create Task
-
-POST
-
-```text
-/api/tasks
-```
-
-#### Get All Tasks
-
-GET
-
-```text
-/api/tasks
-```
-
-#### Get Task By Id
-
-GET
-
-```text
-/api/tasks/{id}
-```
-
-#### Update Task
-
-PUT
-
-```text
-/api/tasks/{id}
-```
-
-#### Delete Task
-
-DELETE
-
-```text
-/api/tasks/{id}
-```
-
----
-
-## Security
-
-* BCrypt Password Encryption
-* JWT Token Generation
-* JWT Token Validation
-* Protected Endpoints
-* Unauthorized Request Blocking
-
----
-
-## Documentation
-
-Documentation is available under:
-
-```text
-/docs
-```
-
-Documents:
-
-* Project Charter
-* Business Requirements
-* Functional Requirements
-* User Stories
-* Sprint Plan
-* Architecture
-* API Specification
-* Database Design
-* Risk Register
-* Deployment Guide
-* Product Roadmap
-* Daily Task Plan
-* Team Onboarding Guide
-
----
-
-## Running the Application
-
-Clone Repository
-
-```bash
-git clone <repository-url>
-```
-
-Run Application
-
-```bash
-mvn spring-boot:run
-```
-
-Application URL
-
-```text
-http://localhost:8080
-```
 
 ---
 
@@ -317,34 +41,52 @@ http://localhost:8080
 * Task Entity
 * Task Repository
 * Task CRUD APIs
+* Task Assignment
+* Priority Management
+* Due Dates
+
+✅ Sprint 4 - Comments & Collaboration
+
+* Comment Entity
+* Comment Repository
+* Comment Controller
+* Task Comments
+* Collaboration Features
+
+✅ Sprint 5 - Activity Logs
+
+* Activity Log Entity
+* Activity Log Repository
+* Activity Log Controller
+* Audit Trail
+* User Activity Tracking
 
 ---
 
 ### Current Sprint
 
-🚧 Sprint 7 - Comments & Collaboration Module
+🚧 Sprint 6 - Notifications
 
 Planned:
 
-* Task Comments
-* Project Discussions
-* Collaboration Features
+* Task Assignment Notifications
+* Task Status Change Notifications
+* Due Date Alerts
+* Project Notifications
 
 ---
 
 ### Upcoming Sprints
 
-📌 Activity Logs
-
-📌 Notifications
+📌 Role-Based Access Control (ADMIN / MANAGER / EMPLOYEE)
 
 📌 Dashboard & Reporting
-
-📌 Role-Based Access Control
 
 📌 React Frontend
 
 📌 AI Copilot
+
+📌 PostgreSQL Migration
 
 📌 Docker Deployment
 
@@ -352,15 +94,69 @@ Planned:
 
 📌 CI/CD Pipeline
 
+📌 Monitoring & Logging
+
+---
+
+## API Endpoints
+
+### Comments
+
+POST /api/comments
+
+GET /api/comments
+
+GET /api/comments/{id}
+
+GET /api/comments/task/{taskId}
+
+DELETE /api/comments/{id}
+
+---
+
+### Activity Logs
+
+POST /api/activity-logs
+
+GET /api/activity-logs
+
+GET /api/activity-logs/{id}
+
+DELETE /api/activity-logs/{id}
+
 ---
 
 ## Version
 
 Current Version:
 
-```text
-v0.6
-```
+v0.8
+
+---
+
+## Roadmap Progress
+
+✅ Authentication & Security
+
+✅ Project Management
+
+✅ Task Management
+
+✅ Comments & Collaboration
+
+✅ Activity Logs
+
+🚧 Notifications
+
+🚧 Role-Based Access Control
+
+🚧 Dashboard & Reporting
+
+🚧 React Frontend
+
+🚧 AI Copilot
+
+🚧 Deployment & DevOps
 
 ---
 

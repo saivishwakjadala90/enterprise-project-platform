@@ -90,7 +90,7 @@ Status: ✅ Completed
 
 * Notifications
 
-Status: ⏳ Planned
+Status: ✅ Completed
 
 ---
 
