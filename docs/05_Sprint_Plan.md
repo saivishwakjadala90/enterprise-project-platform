@@ -26,13 +26,18 @@
 - Track status, priority, and due dates
 - Add comments
 
-## Sprint 4: Authentication & Security
+## Sprint 4: Authentication & Security ✅ COMPLETED
 
-✅ Add password encryption
-✅ Create login API
-✅ Generate JWT token
-⏳ Add role-based access
-⏳ Secure APIs using JWT filter
+- Add password encryption ✅
+- Create login API ✅
+- Generate JWT token ✅
+- Validate JWT token ✅
+- Protect secured endpoints ✅
+- Block unauthorized access ✅
+- Tested user registration API
+- Tested login API
+- Tested JWT token generation
+- Tested protected endpoints using Bearer token
 
 ## Sprint 5: Dashboard & Reports
 - Project count
