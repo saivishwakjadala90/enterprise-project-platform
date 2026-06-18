@@ -150,14 +150,15 @@ Create Pull Request.
 * Push code daily
 
 ---
+Roles:
+- ADMIN
+- MANAGER
+- EMPLOYEE
 
-Roles Available:
-
-ADMIN
-MANAGER
-EMPLOYEE
-
-Access is controlled using Spring Security RBAC and JWT roles.
+Security:
+- JWT Authentication
+- Role-Based Access Control (RBAC)
+- Spring Security Method Authorization
 
 ## Current Status
 
