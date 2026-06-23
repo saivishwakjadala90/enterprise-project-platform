@@ -17,6 +17,9 @@
 * Read/Unread Notification Status
 * Role-Based Access Control (RBAC)
 * ADMIN / MANAGER / EMPLOYEE Roles
+* Dashboard Summary API
+* Projects By Status API
+* Tasks By Priority API
 * API Testing using Postman
 * Documentation Suite
 * GitHub Integration
@@ -88,18 +91,21 @@
 * Notification RBAC
 * Activity Log RBAC
 
----
-
-### Current Sprint
-
 🚧 Sprint 8 - Dashboard & Reporting
+
+Completed:
+
+* Dashboard Summary API
+* Projects By Status API
+* Tasks By Priority API
+
+In Progress:
+
+* User Activity Analytics
 
 Planned:
 
-* Project Dashboard
-* Task Dashboard
-* KPI Metrics
-* Team Performance Metrics
+* Executive Dashboard Metrics
 * Delivery Analytics
 
 ---
@@ -210,11 +216,21 @@ DELETE /api/notifications/{id}
 
 ---
 
+### Dashboard
+
+GET /api/dashboard/summary
+
+GET /api/dashboard/projects-by-status
+
+GET /api/dashboard/tasks-by-priority
+
+---
+
 ## Version
 
 Current Version:
 
-v1.0
+v1.1
 
 ---
 
@@ -234,7 +250,7 @@ v1.0
 
 ✅ Role-Based Access Control
 
-🚧 Dashboard & Reporting
+🚧 Dashboard & Reporting (In Progress)
 
 🚧 React Frontend
 
@@ -247,4 +263,3 @@ v1.0
 ## Author
 
 Saivishwak Jadala
-# Enterprise Project Platform 
