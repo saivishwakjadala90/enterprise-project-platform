@@ -2,6 +2,8 @@ package com.company.project_platform.controller;
 
 import com.company.project_platform.dto.DashboardSummary;
 import com.company.project_platform.dto.StatusCount;
+import com.company.project_platform.dto.UserActivity;
+import com.company.project_platform.repository.ActivityLogRepository;
 import com.company.project_platform.repository.ProjectRepository;
 import com.company.project_platform.repository.TaskRepository;
 import com.company.project_platform.repository.UserRepository;
@@ -15,17 +17,19 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/dashboard")
 public class DashboardController {
 
-
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
+    private final ActivityLogRepository activityLogRepository;
 
     public DashboardController(UserRepository userRepository,
                                ProjectRepository projectRepository,
-                               TaskRepository taskRepository) {
+                               TaskRepository taskRepository,
+                               ActivityLogRepository activityLogRepository) {
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
+        this.activityLogRepository = activityLogRepository;
     }
 
     @GetMapping("/summary")
@@ -64,10 +68,7 @@ public class DashboardController {
                 ))
                 .entrySet()
                 .stream()
-                .map(entry -> new StatusCount(
-                        entry.getKey(),
-                        entry.getValue()
-                ))
+                .map(entry -> new StatusCount(entry.getKey(), entry.getValue()))
                 .toList();
     }
 
@@ -83,12 +84,23 @@ public class DashboardController {
                 ))
                 .entrySet()
                 .stream()
-                .map(entry -> new StatusCount(
-                        entry.getKey(),
-                        entry.getValue()
-                ))
+                .map(entry -> new StatusCount(entry.getKey(), entry.getValue()))
                 .toList();
     }
 
+    @GetMapping("/user-activity")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public List<UserActivity> getUserActivity() {
 
+        return activityLogRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        activity -> activity.getUserEmail(),
+                        Collectors.counting()
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> new UserActivity(entry.getKey(), entry.getValue()))
+                .toList();
+    }
 }
