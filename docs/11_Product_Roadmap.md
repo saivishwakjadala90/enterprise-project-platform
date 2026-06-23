@@ -2,7 +2,7 @@
 
 ## Vision
 
-Build an enterprise platform that helps organizations manage projects, tasks, resources, delivery risks, reporting, and AI-powered insights.
+Build an enterprise platform that helps organizations manage projects, tasks, resources, delivery risks, reporting, notifications, security, and AI-powered insights.
 
 ---
 
@@ -55,13 +55,13 @@ Status: ✅ Completed
 
 ---
 
-## Phase 4 - Activity & Collaboration
+## Phase 4 - Collaboration & Activity Tracking
 
 Duration: 4 Days
 
 ### Deliverables
 
-* Comments
+* Comments Module
 * Activity Logs
 * Team Collaboration
 
@@ -69,16 +69,15 @@ Status: ✅ Completed
 
 ---
 
-## Phase 5 - Dashboard & Reporting
+## Phase 5 - Notifications
 
-Duration: 5 Days
+Duration: 2 Days
 
 ### Deliverables
 
-* Project Dashboard
-* Team Dashboard
-* Executive Dashboard
-* KPI Reporting
+* User Notifications
+* Read / Unread Status
+* Notification APIs
 
 Status: ✅ Completed
 
@@ -90,31 +89,63 @@ Duration: 3 Days
 
 ### Deliverables
 
-* ADMIN
-* MANAGER
-* EMPLOYEE
+* ADMIN Role
+* MANAGER Role
+* EMPLOYEE Role
+* Project RBAC
+* Task RBAC
+* Comment RBAC
+* Notification RBAC
+* Activity Log RBAC
 
 Status: ✅ Completed
 
 ---
 
-## Phase 7 - React Frontend
+## Phase 7 - Dashboard & Reporting
+
+Duration: 5 Days
+
+### Completed
+
+✅ Dashboard Summary API
+
+✅ Projects By Status API
+
+✅ Tasks By Priority API
+
+### In Progress
+
+🚧 User Activity Analytics
+
+### Planned
+
+📌 Executive Dashboard Metrics
+
+📌 Delivery Analytics
+
+Status: 🚧 In Progress
+
+---
+
+## Phase 8 - React Frontend
 
 Duration: 10 Days
 
 ### Deliverables
 
-* Login
+* Login Page
 * Dashboard
-* Project Screens
-* Task Screens
-* User Screens
+* Projects Screen
+* Tasks Screen
+* Users Screen
+* Notifications Screen
 
 Status: ⏳ Planned
 
 ---
 
-## Phase 8 - AI Copilot
+## Phase 9 - AI Copilot
 
 Duration: 8 Days
 
@@ -124,12 +155,13 @@ Duration: 8 Days
 * Risk Detection
 * Sprint Summaries
 * AI Assistant
+* Delivery Recommendations
 
 Status: ⏳ Planned
 
 ---
 
-## Phase 9 - Deployment
+## Phase 10 - Deployment & DevOps
 
 Duration: 5 Days
 
@@ -137,8 +169,9 @@ Duration: 5 Days
 
 * Docker
 * AWS Deployment
-* CI/CD
+* CI/CD Pipeline
 * Monitoring
+* Logging
 
 Status: ⏳ Planned
 
@@ -153,11 +186,12 @@ Enterprise AI Delivery Operating System
 * User Management
 * Project Management
 * Task Management
-* Team Collaboration
-* Reporting & Dashboards
-* AI Copilot
+* Comments & Collaboration
+* Activity Logs
 * Notifications
-* Security & Access Control
+* Dashboard & Reporting
+* AI Copilot
+* Security & RBAC
 
 ### Target Users
 
@@ -167,4 +201,4 @@ Enterprise AI Delivery Operating System
 * Delivery Managers
 * Executives
 
-Estimated Completion Time: 45–50 Working Days
+Estimated Completion Time: 50 Working Days

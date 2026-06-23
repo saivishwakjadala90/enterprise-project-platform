@@ -2,7 +2,38 @@
 
 ## Project Overview
 
-Enterprise AI Delivery Operating System is a platform designed to manage projects, tasks, teams, reporting, and AI-powered delivery insights.
+Enterprise AI Delivery Operating System is a platform designed to manage projects, tasks, teams, reporting, notifications, security, and AI-powered delivery insights.
+
+---
+
+## Current Project Status
+
+### Version
+
+v1.1
+
+### Completed Modules
+
+* User Management
+* Authentication
+* JWT Security
+* Role-Based Access Control
+* Project Management
+* Task Management
+* Comments & Collaboration
+* Activity Logs
+* Notifications
+* Dashboard Summary API
+* Projects By Status API
+* Tasks By Priority API
+
+### Current Sprint
+
+🚧 Dashboard & Reporting
+
+### Current Task
+
+* User Activity Analytics
 
 ---
 
@@ -18,8 +49,8 @@ Enterprise AI Delivery Operating System is a platform designed to manage project
 
 ### Database
 
+* H2 Database (Development)
 * PostgreSQL (Future)
-* H2 (Development)
 
 ### Frontend
 
@@ -33,6 +64,52 @@ Enterprise AI Delivery Operating System is a platform designed to manage project
 * Docker
 * AWS
 * GitHub Actions
+* CI/CD
+
+---
+
+## Security Model
+
+### Roles
+
+#### ADMIN
+
+Can:
+
+* Manage Users
+* Manage Projects
+* Manage Tasks
+* Manage Notifications
+* View Activity Logs
+* Access Dashboard APIs
+
+#### MANAGER
+
+Can:
+
+* Create Projects
+* Create Tasks
+* Manage Team Work
+* Create Notifications
+* Access Dashboard APIs
+
+#### EMPLOYEE
+
+Can:
+
+* View Projects
+* View Tasks
+* Create Comments
+* View Personal Notifications
+
+---
+
+## Authentication
+
+* JWT Token Authentication
+* BCrypt Password Encryption
+* Role-Based Access Control (RBAC)
+* Spring Security Method Authorization
 
 ---
 
@@ -51,7 +128,7 @@ git clone <repository-url>
 Run Application
 
 ```bash
-mvn spring-boot:run
+mvnw.cmd spring-boot:run
 ```
 
 ### Step 3
@@ -67,7 +144,7 @@ Read Documentation
 
 ## Team Structure
 
-### Project Owner
+### Product Owner
 
 Responsibilities:
 
@@ -82,20 +159,22 @@ Responsibilities:
 * APIs
 * Security
 * Database
+* Dashboard Services
 
 ### Frontend Team
 
 Responsibilities:
 
 * React UI
-* Dashboards
+* Dashboard Screens
 * User Experience
 
 ### QA Team
 
 Responsibilities:
 
-* Testing
+* API Testing
+* UI Testing
 * Bug Tracking
 
 ### DevOps Team
@@ -110,68 +189,83 @@ Responsibilities:
 
 Responsibilities:
 
-* Copilot Features
-* Reporting Insights
+* AI Copilot
 * Risk Detection
+* Sprint Summaries
+* Delivery Insights
 
 ---
 
-## Git Workflow
+## Current APIs
 
-Create feature branch:
+### Authentication
 
-```bash
-git checkout -b feature/module-name
-```
+* Register
+* Login
 
-Commit changes:
+### Users
 
-```bash
-git add .
-git commit -m "Implemented feature"
-```
+* User Management APIs
 
-Push:
+### Projects
 
-```bash
-git push origin feature/module-name
-```
+* CRUD APIs
 
-Create Pull Request.
+### Tasks
+
+* CRUD APIs
+
+### Comments
+
+* Collaboration APIs
+
+### Activity Logs
+
+* Audit Trail APIs
+
+### Notifications
+
+* Notification APIs
+
+### Dashboard
+
+* Summary API
+* Projects By Status API
+* Tasks By Priority API
 
 ---
 
 ## Coding Standards
 
-* Use meaningful names
+* Use meaningful class names
 * Follow layered architecture
-* Write API documentation
-* Update roadmap after completion
-* Push code daily
+* Keep controllers lightweight
+* Use service-oriented design
+* Document APIs
+* Update roadmap after sprint completion
+* Commit code daily
 
 ---
-Roles:
-- ADMIN
-- MANAGER
-- EMPLOYEE
 
-Security:
-- JWT Authentication
-- Role-Based Access Control (RBAC)
-- Spring Security Method Authorization
+## Upcoming Work
 
-## Current Status
+### Dashboard Sprint
 
-Completed:
+* User Activity Analytics
+* Executive Dashboard Metrics
+* Delivery Analytics
 
-* User Management
-* Authentication
-* JWT Security
-* Documentation
+### Future Sprints
 
-Next:
+* React Frontend
+* AI Copilot
+* PostgreSQL Migration
+* Docker
+* AWS
+* CI/CD
 
-* Project Management
-* Task Management
-* Reporting
-* AI Features
+---
+
+## Author
+
+Saivishwak Jadala
