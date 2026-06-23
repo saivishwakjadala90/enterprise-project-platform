@@ -1,6 +1,12 @@
-## Features
+# Enterprise AI Delivery Operating System
 
-### Completed Features
+A Spring Boot based Enterprise Project Management Platform with JWT Authentication, Role-Based Access Control (RBAC), Project Management, Task Management, Notifications, Activity Tracking, Dashboard Reporting, and AI-powered delivery insights.
+
+---
+
+# Features
+
+## Completed Features
 
 * User Registration
 * User Login
@@ -20,17 +26,75 @@
 * Dashboard Summary API
 * Projects By Status API
 * Tasks By Priority API
+* User Activity Analytics API
+* Executive Metrics API
+* Delivery Analytics API
 * API Testing using Postman
 * Documentation Suite
 * GitHub Integration
 
 ---
 
-## Current Status
+# Tech Stack
 
-### Completed Sprints
+## Backend
 
-✅ Sprint 1 - Foundation & Security
+* Java 21
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* JWT
+
+## Database
+
+* H2 Database (Development)
+* PostgreSQL (Planned)
+
+## Tools
+
+* Maven
+* IntelliJ IDEA
+* Postman
+* Git
+* GitHub
+
+---
+
+# Project Structure
+
+```text
+Enterprise-Project-Platform
+│
+├── backend
+│   └── project-platform
+│       ├── src
+│       ├── pom.xml
+│       └── README.md
+│
+├── docs
+│
+└── frontend (Planned)
+```
+
+---
+
+# Authentication Flow
+
+1. User registers
+2. Password is encrypted using BCrypt
+3. User logs in
+4. JWT token is generated
+5. JWT token is sent in Authorization header
+6. JWT token is validated
+7. Authorized users receive access
+
+---
+
+# Current Status
+
+## Completed Sprints
+
+### ✅ Sprint 1 - Foundation & Security
 
 * User Management
 * Authentication
@@ -38,13 +102,13 @@
 * JWT Security
 * Protected APIs
 
-✅ Sprint 2 - Project Management
+### ✅ Sprint 2 - Project Management
 
 * Project Entity
 * Project Repository
 * Project CRUD APIs
 
-✅ Sprint 3 - Task Management
+### ✅ Sprint 3 - Task Management
 
 * Task Entity
 * Task Repository
@@ -53,7 +117,7 @@
 * Priority Management
 * Due Dates
 
-✅ Sprint 4 - Comments & Collaboration
+### ✅ Sprint 4 - Comments & Collaboration
 
 * Comment Entity
 * Comment Repository
@@ -61,7 +125,7 @@
 * Task Comments
 * Collaboration Features
 
-✅ Sprint 5 - Activity Logs
+### ✅ Sprint 5 - Activity Logs
 
 * Activity Log Entity
 * Activity Log Repository
@@ -69,7 +133,7 @@
 * Audit Trail
 * User Activity Tracking
 
-✅ Sprint 6 - Notifications
+### ✅ Sprint 6 - Notifications
 
 * Notification Entity
 * Notification Repository
@@ -78,7 +142,7 @@
 * Read/Unread Status
 * Notification APIs
 
-✅ Sprint 7 - Role-Based Access Control
+### ✅ Sprint 7 - Role-Based Access Control
 
 * ADMIN Role
 * MANAGER Role
@@ -91,28 +155,32 @@
 * Notification RBAC
 * Activity Log RBAC
 
-🚧 Sprint 8 - Dashboard & Reporting
-
-Completed:
+### ✅ Sprint 8 - Dashboard & Reporting
 
 * Dashboard Summary API
 * Projects By Status API
 * Tasks By Priority API
-
-In Progress:
-
-* User Activity Analytics
-
-Planned:
-
-* Executive Dashboard Metrics
-* Delivery Analytics
+* User Activity Analytics API
+* Executive Metrics API
+* Delivery Analytics API
 
 ---
 
-### Upcoming Sprints
+## Current Sprint
 
-📌 React Frontend
+### 🚧 Sprint 9 - React Frontend
+
+Planned:
+
+* Login Page
+* Dashboard Page
+* Projects Page
+* Tasks Page
+* Notifications Page
+
+---
+
+## Upcoming Sprints
 
 📌 AI Copilot
 
@@ -128,9 +196,9 @@ Planned:
 
 ---
 
-## API Endpoints
+# API Endpoints
 
-### Authentication
+## Authentication
 
 POST /api/auth/register
 
@@ -138,7 +206,7 @@ POST /api/auth/login
 
 ---
 
-### Users
+## Users
 
 POST /api/users
 
@@ -146,7 +214,7 @@ GET /api/users
 
 ---
 
-### Projects
+## Projects
 
 POST /api/projects
 
@@ -160,7 +228,7 @@ DELETE /api/projects/{id}
 
 ---
 
-### Tasks
+## Tasks
 
 POST /api/tasks
 
@@ -174,7 +242,7 @@ DELETE /api/tasks/{id}
 
 ---
 
-### Comments
+## Comments
 
 POST /api/comments
 
@@ -188,7 +256,7 @@ DELETE /api/comments/{id}
 
 ---
 
-### Activity Logs
+## Activity Logs
 
 POST /api/activity-logs
 
@@ -200,7 +268,7 @@ DELETE /api/activity-logs/{id}
 
 ---
 
-### Notifications
+## Notifications
 
 POST /api/notifications
 
@@ -216,7 +284,7 @@ DELETE /api/notifications/{id}
 
 ---
 
-### Dashboard
+## Dashboard
 
 GET /api/dashboard/summary
 
@@ -224,17 +292,84 @@ GET /api/dashboard/projects-by-status
 
 GET /api/dashboard/tasks-by-priority
 
+GET /api/dashboard/user-activity
+
+GET /api/dashboard/executive-metrics
+
+GET /api/dashboard/delivery-analytics
+
 ---
 
-## Version
+# Security
+
+* BCrypt Password Encryption
+* JWT Token Generation
+* JWT Token Validation
+* Role-Based Access Control (RBAC)
+* Protected API Endpoints
+* Unauthorized Requests Blocked
+
+---
+
+# Documentation
+
+Documentation is available under:
+
+```text
+/docs
+```
+
+Documents:
+
+* Project Charter
+* Business Requirements
+* Functional Requirements
+* User Stories
+* Sprint Plan
+* Architecture
+* API Specification
+* Database Design
+* Risk Register
+* Deployment Guide
+* Product Roadmap
+* Daily Task Plan
+* Team Onboarding Guide
+
+---
+
+# Running the Application
+
+Clone Repository
+
+```bash
+git clone <repository-url>
+```
+
+Run Application
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+Application URL
+
+```text
+http://localhost:8080
+```
+
+---
+
+# Version
 
 Current Version:
 
-v1.1
+```text
+v1.2
+```
 
 ---
 
-## Roadmap Progress
+# Roadmap Progress
 
 ✅ Authentication & Security
 
@@ -250,7 +385,7 @@ v1.1
 
 ✅ Role-Based Access Control
 
-🚧 Dashboard & Reporting (In Progress)
+✅ Dashboard & Reporting
 
 🚧 React Frontend
 
@@ -260,6 +395,6 @@ v1.1
 
 ---
 
-## Author
+# Author
 
 Saivishwak Jadala

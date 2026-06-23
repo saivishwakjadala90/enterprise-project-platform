@@ -1,9 +1,12 @@
 package com.company.project_platform.controller;
 
 import com.company.project_platform.dto.DashboardSummary;
+import com.company.project_platform.dto.DeliveryAnalytics;
+import com.company.project_platform.dto.ExecutiveMetrics;
 import com.company.project_platform.dto.StatusCount;
 import com.company.project_platform.dto.UserActivity;
 import com.company.project_platform.repository.ActivityLogRepository;
+import com.company.project_platform.repository.NotificationRepository;
 import com.company.project_platform.repository.ProjectRepository;
 import com.company.project_platform.repository.TaskRepository;
 import com.company.project_platform.repository.UserRepository;
@@ -21,21 +24,23 @@ public class DashboardController {
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
     private final ActivityLogRepository activityLogRepository;
+    private final NotificationRepository notificationRepository;
 
     public DashboardController(UserRepository userRepository,
                                ProjectRepository projectRepository,
                                TaskRepository taskRepository,
-                               ActivityLogRepository activityLogRepository) {
+                               ActivityLogRepository activityLogRepository,
+                               NotificationRepository notificationRepository) {
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
         this.activityLogRepository = activityLogRepository;
+        this.notificationRepository = notificationRepository;
     }
 
     @GetMapping("/summary")
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public DashboardSummary getDashboardSummary() {
-
         long totalUsers = userRepository.count();
         long totalProjects = projectRepository.count();
         long totalTasks = taskRepository.count();
@@ -47,19 +52,12 @@ public class DashboardController {
 
         long pendingTasks = totalTasks - completedTasks;
 
-        return new DashboardSummary(
-                totalUsers,
-                totalProjects,
-                totalTasks,
-                completedTasks,
-                pendingTasks
-        );
+        return new DashboardSummary(totalUsers, totalProjects, totalTasks, completedTasks, pendingTasks);
     }
 
     @GetMapping("/projects-by-status")
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public List<StatusCount> getProjectsByStatus() {
-
         return projectRepository.findAll()
                 .stream()
                 .collect(Collectors.groupingBy(
@@ -75,7 +73,6 @@ public class DashboardController {
     @GetMapping("/tasks-by-priority")
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public List<StatusCount> getTasksByPriority() {
-
         return taskRepository.findAll()
                 .stream()
                 .collect(Collectors.groupingBy(
@@ -91,7 +88,6 @@ public class DashboardController {
     @GetMapping("/user-activity")
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public List<UserActivity> getUserActivity() {
-
         return activityLogRepository.findAll()
                 .stream()
                 .collect(Collectors.groupingBy(
@@ -102,5 +98,50 @@ public class DashboardController {
                 .stream()
                 .map(entry -> new UserActivity(entry.getKey(), entry.getValue()))
                 .toList();
+    }
+
+    @GetMapping("/executive-metrics")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public ExecutiveMetrics getExecutiveMetrics() {
+        long activeProjects = projectRepository.findAll()
+                .stream()
+                .filter(project -> "IN_PROGRESS".equalsIgnoreCase(project.getStatus()))
+                .count();
+
+        long completedProjects = projectRepository.findAll()
+                .stream()
+                .filter(project -> "COMPLETED".equalsIgnoreCase(project.getStatus()))
+                .count();
+
+        long highPriorityTasks = taskRepository.findAll()
+                .stream()
+                .filter(task -> "HIGH".equalsIgnoreCase(task.getPriority()))
+                .count();
+
+        long unreadNotifications = notificationRepository.findAll()
+                .stream()
+                .filter(notification -> "UNREAD".equalsIgnoreCase(notification.getStatus()))
+                .count();
+
+        return new ExecutiveMetrics(activeProjects, completedProjects, highPriorityTasks, unreadNotifications);
+    }
+
+    @GetMapping("/delivery-analytics")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public DeliveryAnalytics getDeliveryAnalytics() {
+        long totalTasks = taskRepository.count();
+
+        long completedTasks = taskRepository.findAll()
+                .stream()
+                .filter(task -> "COMPLETED".equalsIgnoreCase(task.getStatus()))
+                .count();
+
+        long pendingTasks = totalTasks - completedTasks;
+
+        double completionRate = totalTasks == 0
+                ? 0
+                : (completedTasks * 100.0) / totalTasks;
+
+        return new DeliveryAnalytics(totalTasks, completedTasks, pendingTasks, completionRate);
     }
 }
