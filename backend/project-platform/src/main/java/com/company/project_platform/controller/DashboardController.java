@@ -1,15 +1,20 @@
 package com.company.project_platform.controller;
 
 import com.company.project_platform.dto.DashboardSummary;
+import com.company.project_platform.dto.StatusCount;
 import com.company.project_platform.repository.ProjectRepository;
 import com.company.project_platform.repository.TaskRepository;
 import com.company.project_platform.repository.UserRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/dashboard")
 public class DashboardController {
+
 
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
@@ -46,4 +51,44 @@ public class DashboardController {
                 pendingTasks
         );
     }
+
+    @GetMapping("/projects-by-status")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public List<StatusCount> getProjectsByStatus() {
+
+        return projectRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        project -> project.getStatus(),
+                        Collectors.counting()
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> new StatusCount(
+                        entry.getKey(),
+                        entry.getValue()
+                ))
+                .toList();
+    }
+
+    @GetMapping("/tasks-by-priority")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public List<StatusCount> getTasksByPriority() {
+
+        return taskRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        task -> task.getPriority(),
+                        Collectors.counting()
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> new StatusCount(
+                        entry.getKey(),
+                        entry.getValue()
+                ))
+                .toList();
+    }
+
+
 }
