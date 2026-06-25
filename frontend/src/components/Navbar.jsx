@@ -1,8 +1,40 @@
-import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    Box,
+    IconButton,
+    Badge
+} from "@mui/material";
+
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link, useNavigate } from "react-router-dom";
+import api from "../services/api";
 
 function Navbar() {
     const navigate = useNavigate();
+    const [unreadCount, setUnreadCount] = useState(0);
+
+    useEffect(() => {
+        fetchUnreadCount();
+    }, []);
+
+    const fetchUnreadCount = async () => {
+        try {
+            const email = localStorage.getItem("email");
+            const response = await api.get(`/api/notifications/user/${email}`);
+
+            const unread = response.data.filter(
+                notification => notification.status === "UNREAD"
+            ).length;
+
+            setUnreadCount(unread);
+        } catch (error) {
+            console.error("Failed to fetch notifications", error);
+        }
+    };
 
     const logout = () => {
         localStorage.clear();
@@ -28,6 +60,12 @@ function Navbar() {
                     <Button color="inherit" component={Link} to="/tasks">
                         Tasks
                     </Button>
+
+                    <IconButton color="inherit" component={Link} to="/notifications">
+                        <Badge badgeContent={unreadCount} color="error">
+                            <NotificationsIcon />
+                        </Badge>
+                    </IconButton>
 
                     <Button color="inherit" onClick={logout}>
                         Logout
