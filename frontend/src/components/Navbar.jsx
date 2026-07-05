@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PsychologyIcon from "@mui/icons-material/Psychology";
 import {
     AppBar,
     Toolbar,
@@ -59,6 +60,15 @@ function Navbar() {
 
                     <Button color="inherit" component={Link} to="/tasks">
                         Tasks
+                    </Button>
+
+                    <Button
+                        color="inherit"
+                        component={Link}
+                        to="/ai-copilot"
+                        startIcon={<PsychologyIcon />}
+                    >
+                        AI Copilot
                     </Button>
 
                     <IconButton color="inherit" component={Link} to="/notifications">
