@@ -8,7 +8,9 @@ import {
     List,
     ListItem,
     ListItemText,
-    Alert
+    Alert,
+    TextField,
+    Button
 } from "@mui/material";
 
 import PsychologyIcon from "@mui/icons-material/Psychology";
@@ -22,6 +24,9 @@ import api from "../services/api";
 function AICopilot() {
     const [insight, setInsight] = useState(null);
     const [error, setError] = useState("");
+    const [question, setQuestion] = useState("");
+    const [answer, setAnswer] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetchAIInsights();
@@ -34,6 +39,26 @@ function AICopilot() {
         } catch (error) {
             console.error("Failed to fetch AI insights", error);
             setError("Failed to load AI insights.");
+        }
+    };
+
+    const askAI = async () => {
+        if (!question.trim()) return;
+
+        try {
+            setLoading(true);
+            setAnswer("");
+
+            const response = await api.post("/api/ai/chat", {
+                question: question
+            });
+
+            setAnswer(response.data.answer);
+        } catch (error) {
+            console.error("Failed to ask AI", error);
+            setAnswer("Failed to get AI response.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -58,6 +83,18 @@ function AICopilot() {
 
                 {insight ? (
                     <>
+                        <Card elevation={4} sx={{ marginBottom: 4, backgroundColor: "#f5f7ff" }}>
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Executive Summary
+                                </Typography>
+
+                                <Typography variant="body1">
+                                    {insight.executiveSummary}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+
                         <Grid container spacing={3} sx={{ marginBottom: 4 }}>
                             <AICard
                                 icon={<PsychologyIcon fontSize="large" />}
@@ -88,7 +125,7 @@ function AICopilot() {
                             />
                         </Grid>
 
-                        <Grid container spacing={3}>
+                        <Grid container spacing={3} sx={{ marginBottom: 4 }}>
                             <Grid item xs={12} md={6}>
                                 <Card elevation={4}>
                                     <CardContent>
@@ -125,6 +162,42 @@ function AICopilot() {
                                 </Card>
                             </Grid>
                         </Grid>
+
+                        <Card elevation={4}>
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Ask AI
+                                </Typography>
+
+                                <TextField
+                                    fullWidth
+                                    label="Ask about your projects, tasks, risks, or sprint"
+                                    value={question}
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                    sx={{ marginBottom: 2 }}
+                                />
+
+                                <Button
+                                    variant="contained"
+                                    onClick={askAI}
+                                    disabled={loading}
+                                >
+                                    {loading ? "Thinking..." : "Ask AI"}
+                                </Button>
+
+                                {answer && (
+                                    <Box sx={{ marginTop: 3 }}>
+                                        <Typography variant="h6">
+                                            AI Response
+                                        </Typography>
+
+                                        <Typography sx={{ marginTop: 1 }}>
+                                            {answer}
+                                        </Typography>
+                                    </Box>
+                                )}
+                            </CardContent>
+                        </Card>
                     </>
                 ) : (
                     <Typography>Loading AI insights...</Typography>

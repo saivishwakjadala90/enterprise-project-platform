@@ -29,17 +29,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        System.out.println("==========");
-        System.out.println("REQUEST PATH = " + path);
-        System.out.println("==========");
-
         if (path.equals("/api/auth/login")
                 || path.equals("/api/auth/register")
-                || path.startsWith("/api/ai")) {
+                || path.startsWith("/api/ai/")) {
             filterChain.doFilter(request, response);
             return;
         }
-        System.out.println("JWT Filter reached");
+
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
