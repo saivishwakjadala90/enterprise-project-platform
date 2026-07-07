@@ -191,9 +191,13 @@ function AICopilot() {
                                             AI Response
                                         </Typography>
 
-                                        <Typography sx={{ marginTop: 1 }}>
-                                            {answer}
-                                        </Typography>
+                                        <Box sx={{ marginTop: 1 }}>
+                                            {answer.split("\n").map((line, index) => (
+                                                <Typography key={index} sx={{ marginBottom: 1 }}>
+                                                    {line}
+                                                </Typography>
+                                            ))}
+                                        </Box>
                                     </Box>
                                 )}
                             </CardContent>
