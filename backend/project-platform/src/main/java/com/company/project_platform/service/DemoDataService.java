@@ -22,6 +22,9 @@ public class DemoDataService {
 
     public String generateDemoData() {
 
+        taskRepository.deleteAll();
+        projectRepository.deleteAll();
+
         Project project1 = new Project();
         project1.setProjectName("Enterprise AI Delivery OS");
         project1.setDescription("AI-powered delivery management platform");
