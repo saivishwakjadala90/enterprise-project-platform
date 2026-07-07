@@ -33,6 +33,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/enterprise_platform
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: admin123
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
 
   frontend:
     build:
@@ -44,7 +45,7 @@ services:
       - backend
 
     ports:
-      - "5173:5173"
+      - "5173:51733"
 
     environment:
       VITE_API_URL: http://backend:8080
