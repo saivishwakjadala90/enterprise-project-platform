@@ -15,13 +15,16 @@ public class AIChatService {
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
     private final AIService aiService;
+    private final OpenAIService openAIService;
 
     public AIChatService(ProjectRepository projectRepository,
                          TaskRepository taskRepository,
-                         AIService aiService) {
+                         AIService aiService,
+                         OpenAIService openAIService) {
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
         this.aiService = aiService;
+        this.openAIService = openAIService;
     }
 
     public AIChatResponse askQuestion(String question) {
@@ -90,9 +93,17 @@ public class AIChatService {
             );
         }
 
-        return new AIChatResponse(
-                "I can help with sprint summaries, project health, risks, projects, and tasks. Try asking: 'which projects are at risk?' or 'summarize my sprint'."
-        );
+        String prompt =
+                "User question: " + question + "\n" +
+                        "Total projects: " + totalProjects + "\n" +
+                        "Total tasks: " + totalTasks + "\n" +
+                        "Completed tasks: " + completedTasks + "\n" +
+                        "Pending tasks: " + pendingTasks + "\n" +
+                        "High priority tasks: " + highPriorityTasks + "\n" +
+                        "Blocked tasks: " + blockedTasks + "\n" +
+                        "Give a concise enterprise project delivery recommendation.";
+
+        return new AIChatResponse(openAIService.askOpenAI(prompt));
     }
 
     private String buildRiskResponse(List<Project> projects, List<Task> tasks) {
