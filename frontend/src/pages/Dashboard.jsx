@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Grid, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 import api from "../services/api";
 
@@ -33,6 +33,17 @@ function Dashboard() {
         }
     };
 
+    const generateDemoData = async () => {
+        try {
+            await api.post("/api/demo/generate");
+            await fetchDashboardData();
+            alert("Demo data generated successfully");
+        } catch (error) {
+            console.error("Failed to generate demo data", error);
+            alert("Failed to generate demo data");
+        }
+    };
+
     return (
         <div>
             <Navbar />
@@ -41,6 +52,14 @@ function Dashboard() {
                 <Typography variant="h4" gutterBottom>
                     Enterprise Dashboard
                 </Typography>
+
+                <Button
+                    variant="contained"
+                    onClick={generateDemoData}
+                    sx={{ marginBottom: 3 }}
+                >
+                    Generate Demo Data
+                </Button>
 
                 {summary ? (
                     <Grid container spacing={3} sx={{ marginBottom: 4 }}>
