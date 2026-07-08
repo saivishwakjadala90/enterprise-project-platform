@@ -29,8 +29,8 @@ function AICopilot() {
     const [insight, setInsight] = useState(null);
     const [error, setError] = useState("");
     const [question, setQuestion] = useState("");
-    const [answer, setAnswer] = useState("");
     const [loading, setLoading] = useState(false);
+    const [chatHistory, setChatHistory] = useState([]);
 
     useEffect(() => {
         fetchAIInsights();
@@ -49,21 +49,42 @@ function AICopilot() {
     const askAI = async () => {
         if (!question.trim()) return;
 
+        const userQuestion = question;
+
         try {
             setLoading(true);
-            setAnswer("");
+            setQuestion("");
 
             const response = await api.post("/api/ai/chat", {
-                question: question
+                question: userQuestion
             });
 
-            setAnswer(response.data.answer);
+            const aiAnswer = response.data.answer;
+
+            setChatHistory((prev) => [
+                ...prev,
+                {
+                    question: userQuestion,
+                    answer: aiAnswer
+                }
+            ]);
         } catch (error) {
             console.error("Failed to ask AI", error);
-            setAnswer("Failed to get AI response. Please check backend logs or OpenAI API key.");
+
+            setChatHistory((prev) => [
+                ...prev,
+                {
+                    question: userQuestion,
+                    answer: "Failed to get AI response. Please check backend logs or OpenAI API key."
+                }
+            ]);
         } finally {
             setLoading(false);
         }
+    };
+
+    const askSuggestedQuestion = (suggestedQuestion) => {
+        setQuestion(suggestedQuestion);
     };
 
     return (
@@ -186,6 +207,29 @@ function AICopilot() {
                                     </Typography>
                                 </Box>
 
+                                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, marginBottom: 2 }}>
+                                    <Chip
+                                        label="Summarize my sprint"
+                                        onClick={() => askSuggestedQuestion("Summarize my sprint")}
+                                        clickable
+                                    />
+                                    <Chip
+                                        label="Which projects are at risk?"
+                                        onClick={() => askSuggestedQuestion("Which projects are at risk?")}
+                                        clickable
+                                    />
+                                    <Chip
+                                        label="What should I focus on today?"
+                                        onClick={() => askSuggestedQuestion("What should I focus on today?")}
+                                        clickable
+                                    />
+                                    <Chip
+                                        label="Give me an executive summary"
+                                        onClick={() => askSuggestedQuestion("Give me an executive summary")}
+                                        clickable
+                                    />
+                                </Box>
+
                                 <TextField
                                     fullWidth
                                     multiline
@@ -205,24 +249,52 @@ function AICopilot() {
                                     {loading ? "Thinking..." : "Ask AI"}
                                 </Button>
 
-                                {answer && (
-                                    <Box
-                                        sx={{
-                                            marginTop: 3,
-                                            padding: 3,
-                                            borderRadius: 2,
-                                            backgroundColor: "#f1f5f9",
-                                            border: "1px solid #e2e8f0"
-                                        }}
-                                    >
+                                {chatHistory.length > 0 && (
+                                    <Box sx={{ marginTop: 3 }}>
                                         <Typography variant="h6" fontWeight="bold" gutterBottom>
-                                            AI Response
+                                            Chat History
                                         </Typography>
 
-                                        {answer.split("\n").map((line, index) => (
-                                            <Typography key={index} sx={{ marginBottom: 1 }}>
-                                                {line}
-                                            </Typography>
+                                        {chatHistory.map((chat, index) => (
+                                            <Box key={index} sx={{ marginBottom: 3 }}>
+                                                <Box
+                                                    sx={{
+                                                        backgroundColor: "#e3f2fd",
+                                                        padding: 2,
+                                                        borderRadius: 2,
+                                                        marginBottom: 1,
+                                                        marginLeft: { xs: 0, md: "20%" }
+                                                    }}
+                                                >
+                                                    <Typography fontWeight="bold">
+                                                        👤 You
+                                                    </Typography>
+
+                                                    <Typography>
+                                                        {chat.question}
+                                                    </Typography>
+                                                </Box>
+
+                                                <Box
+                                                    sx={{
+                                                        backgroundColor: "#f5f5f5",
+                                                        padding: 2,
+                                                        borderRadius: 2,
+                                                        marginRight: { xs: 0, md: "20%" },
+                                                        border: "1px solid #ddd"
+                                                    }}
+                                                >
+                                                    <Typography fontWeight="bold">
+                                                        🤖 AI Copilot
+                                                    </Typography>
+
+                                                    {chat.answer.split("\n").map((line, lineIndex) => (
+                                                        <Typography key={lineIndex} sx={{ marginTop: 1 }}>
+                                                            {line}
+                                                        </Typography>
+                                                    ))}
+                                                </Box>
+                                            </Box>
                                         ))}
                                     </Box>
                                 )}
