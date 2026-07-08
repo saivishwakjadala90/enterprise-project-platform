@@ -12,6 +12,7 @@ function Dashboard() {
     const [projectsByStatus, setProjectsByStatus] = useState([]);
     const [tasksByPriority, setTasksByPriority] = useState([]);
     const [executiveMetrics, setExecutiveMetrics] = useState(null);
+    const [aiInsight, setAiInsight] = useState(null);
 
     useEffect(() => {
         fetchDashboardData();
@@ -23,11 +24,13 @@ function Dashboard() {
             const projectsResponse = await api.get("/api/dashboard/projects-by-status");
             const tasksResponse = await api.get("/api/dashboard/tasks-by-priority");
             const metricsResponse = await api.get("/api/dashboard/executive-metrics");
+            const aiResponse = await api.get("/api/ai/insights");
 
             setSummary(summaryResponse.data);
             setProjectsByStatus(projectsResponse.data);
             setTasksByPriority(tasksResponse.data);
             setExecutiveMetrics(metricsResponse.data);
+            setAiInsight(aiResponse.data);
         } catch (error) {
             console.error("Failed to fetch dashboard data", error);
         }
@@ -52,6 +55,27 @@ function Dashboard() {
                 <Typography variant="h4" gutterBottom>
                     Enterprise Dashboard
                 </Typography>
+
+                {aiInsight && (
+                    <Card
+                        elevation={4}
+                        sx={{
+                            marginBottom: 4,
+                            backgroundColor: "#f5f7ff",
+                            borderRadius: 3
+                        }}
+                    >
+                        <CardContent>
+                            <Typography variant="h5" fontWeight="bold" gutterBottom>
+                                🤖 AI Executive Summary
+                            </Typography>
+
+                            <Typography color="text.secondary">
+                                {aiInsight.executiveSummary}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                )}
 
                 <Button
                     variant="contained"
