@@ -91,6 +91,14 @@ function Dashboard() {
                         <DashboardCard title="Total Projects" value={summary.totalProjects} />
                         <DashboardCard title="Total Tasks" value={summary.totalTasks} />
                         <DashboardCard title="Completed Tasks" value={summary.completedTasks} />
+
+                        {aiInsight && (
+                            <>
+                                <DashboardCard title="Delivery Health" value={`${aiInsight.healthScore}%`} />
+                                <DashboardCard title="Risk Level" value={aiInsight.riskLevel} />
+                                <DashboardCard title="AI Engine" value="Active" />
+                            </>
+                        )}
                     </Grid>
                 ) : (
                     <Typography>Loading dashboard...</Typography>
