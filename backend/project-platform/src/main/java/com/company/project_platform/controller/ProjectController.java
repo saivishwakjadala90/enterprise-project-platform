@@ -4,6 +4,7 @@ import com.company.project_platform.entity.Project;
 import com.company.project_platform.repository.ProjectRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import com.company.project_platform.service.ActivityLogService;
 
 import java.util.List;
 
@@ -12,15 +13,27 @@ import java.util.List;
 public class ProjectController {
 
     private final ProjectRepository projectRepository;
+    private final ActivityLogService activityLogService;
 
-    public ProjectController(ProjectRepository projectRepository) {
+    public ProjectController(ProjectRepository projectRepository,
+                             ActivityLogService activityLogService) {
+
         this.projectRepository = projectRepository;
+        this.activityLogService = activityLogService;
     }
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     public Project createProject(@RequestBody Project project) {
-        return projectRepository.save(project);
+
+        Project savedProject = projectRepository.save(project);
+
+        activityLogService.createActivity(
+                "PROJECT",
+                "Created project: " + savedProject.getProjectName()
+        );
+
+        return savedProject;
     }
 
     @GetMapping
@@ -46,14 +59,29 @@ public class ProjectController {
             project.setOwnerEmail(updatedProject.getOwnerEmail());
             project.setStartDate(updatedProject.getStartDate());
             project.setEndDate(updatedProject.getEndDate());
-            return projectRepository.save(project);
+            Project savedProject = projectRepository.save(project);
+
+            activityLogService.createActivity(
+                    "PROJECT",
+                    "Updated project: " + savedProject.getProjectName()
+            );
+
+            return savedProject;
         }).orElse(null);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteProject(@PathVariable Long id) {
+        projectRepository.findById(id).ifPresent(project ->
+                activityLogService.createActivity(
+                        "PROJECT",
+                        "Deleted project: " + project.getProjectName()
+                )
+        );
+
         projectRepository.deleteById(id);
+
         return "Project deleted successfully";
     }
 }

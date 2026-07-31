@@ -1,46 +1,32 @@
 package com.company.project_platform.controller;
 
 import com.company.project_platform.entity.ActivityLog;
-import com.company.project_platform.repository.ActivityLogRepository;
+import com.company.project_platform.service.ActivityLogService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/activity-logs")
+@CrossOrigin(origins = "*")
 public class ActivityLogController {
 
-    private final ActivityLogRepository activityLogRepository;
+    private final ActivityLogService activityLogService;
 
-    public ActivityLogController(ActivityLogRepository activityLogRepository) {
-        this.activityLogRepository = activityLogRepository;
-    }
-
-    @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
-    public ActivityLog createLog(@RequestBody ActivityLog activityLog) {
-        activityLog.setCreatedAt(LocalDateTime.now());
-        return activityLogRepository.save(activityLog);
+    public ActivityLogController(ActivityLogService activityLogService) {
+        this.activityLogService = activityLogService;
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<ActivityLog> getAllLogs() {
-        return activityLogRepository.findAll();
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public List<ActivityLog> getAllActivities() {
+        return activityLogService.getAllActivities();
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ActivityLog getLogById(@PathVariable Long id) {
-        return activityLogRepository.findById(id).orElse(null);
-    }
-
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String deleteLog(@PathVariable Long id) {
-        activityLogRepository.deleteById(id);
-        return "Activity log deleted successfully";
+    @GetMapping("/recent")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
+    public List<ActivityLog> getRecentActivities() {
+        return activityLogService.getRecentActivities();
     }
 }

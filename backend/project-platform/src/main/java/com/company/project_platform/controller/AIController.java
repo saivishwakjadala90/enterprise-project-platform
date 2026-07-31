@@ -1,11 +1,14 @@
 package com.company.project_platform.controller;
 
+import com.company.project_platform.dto.AIChatRequest;
+import com.company.project_platform.dto.AIChatResponse;
 import com.company.project_platform.dto.AIInsight;
 import com.company.project_platform.service.AIService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/ai")
+@CrossOrigin(origins = "*")
 public class AIController {
 
     private final AIService aiService;
@@ -18,4 +21,5 @@ public class AIController {
     public AIInsight getAIInsights() {
         return aiService.generateInsight();
     }
+
 }

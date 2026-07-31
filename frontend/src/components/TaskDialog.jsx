@@ -7,6 +7,8 @@ import {
     MenuItem,
     TextField
 } from "@mui/material";
+import AttachmentPanel from "./attachments/AttachmentPanel";
+import CommentPanel from "./comments/CommentPanel";
 
 function TaskDialog({
                         open,
@@ -105,6 +107,13 @@ function TaskDialog({
                     onChange={(e) => setDueDate(e.target.value)}
                     InputLabelProps={{ shrink: true }}
                 />
+
+                {editingId && (
+                    <AttachmentPanel taskId={editingId} />
+                )}
+                {editingId && (
+                    <CommentPanel taskId={editingId} />
+                )}
 
             </DialogContent>
 

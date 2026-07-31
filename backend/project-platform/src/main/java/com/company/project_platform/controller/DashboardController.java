@@ -91,14 +91,36 @@ public class DashboardController {
         return activityLogRepository.findAll()
                 .stream()
                 .collect(Collectors.groupingBy(
-                        activity -> activity.getUserEmail(),
+                        activity -> activity.getType() == null
+                                ? "UNKNOWN"
+                                : activity.getType(),
                         Collectors.counting()
                 ))
                 .entrySet()
                 .stream()
-                .map(entry -> new UserActivity(entry.getKey(), entry.getValue()))
+                .map(entry -> new UserActivity(
+                        entry.getKey(),
+                        entry.getValue()
+                ))
                 .toList();
     }
+
+    @GetMapping("/team-workload")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public List<UserActivity> getTeamWorkload() {
+
+        return userRepository.findAll()
+                .stream()
+                .map(user -> new UserActivity(
+                        user.getName(),
+                        taskRepository.findAll()
+                                .stream()
+                                .filter(task -> user.getEmail().equalsIgnoreCase(task.getAssignedTo()))
+                                .count()
+                ))
+                .toList();
+    }
+
 
     @GetMapping("/executive-metrics")
     @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
@@ -143,5 +165,43 @@ public class DashboardController {
                 : (completedTasks * 100.0) / totalTasks;
 
         return new DeliveryAnalytics(totalTasks, completedTasks, pendingTasks, completionRate);
+    }
+
+
+    @GetMapping("/project-progress")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+    public List<java.util.Map<String, Object>> getProjectProgress() {
+
+        return projectRepository.findAll()
+                .stream()
+                .map(project -> {
+
+                    List<com.company.project_platform.entity.Task> tasks =
+                            taskRepository.findAll()
+                                    .stream()
+                                    .filter(task ->
+                                            project.getId().equals(task.getProjectId()))
+                                    .toList();
+
+                    long totalTasks = tasks.size();
+
+                    long completedTasks = tasks.stream()
+                            .filter(task ->
+                                    "COMPLETED".equalsIgnoreCase(task.getStatus()))
+                            .count();
+
+                    int progress = totalTasks == 0
+                            ? 0
+                            : (int) ((completedTasks * 100) / totalTasks);
+
+                    java.util.Map<String, Object> map =
+                            new java.util.HashMap<>();
+
+                    map.put("name", project.getProjectName());
+                    map.put("progress", progress);
+
+                    return map;
+                })
+                .toList();
     }
 }
