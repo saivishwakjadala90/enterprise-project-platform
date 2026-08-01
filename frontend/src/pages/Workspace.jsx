@@ -5,7 +5,7 @@ import { Box,  Grid } from "@mui/material";
 
 import { getWorkspaceOverview } from "../services/workspaceService";
 
-import WorkspaceHeader from "../components/workspace/WorkspaceHeader";
+import WorkspaceHeader from "../components/workspace/WorkspaceHeader.jsx";
 import WorkspaceTabs from "../components/workspace/WorkspaceTabs";
 import WorkspaceStats from "../components/workspace/WorkspaceStats";
 import WorkspaceOverview from "../components/workspace/WorkspaceOverview";
