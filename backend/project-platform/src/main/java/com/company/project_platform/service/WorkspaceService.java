@@ -62,7 +62,9 @@ public class WorkspaceService {
                 completedTasks,
                 pendingTasks,
                 progress,
-                project.getEndDate().toString(),
+                project.getEndDate() != null
+                        ? project.getEndDate().toString()
+                        : "Not Set",
                 risk
         );
     }
