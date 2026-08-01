@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+import { Box,  Grid } from "@mui/material";
+
 import { getWorkspaceOverview } from "../services/workspaceService";
 
-import {
-    Box,
-    Grid,
-    Paper,
-    Typography,
-    LinearProgress
-} from "@mui/material";
+import WorkspaceHeader from "../components/workspace/WorkspaceHeader";
+import WorkspaceTabs from "../components/workspace/WorkspaceTabs";
+import WorkspaceStats from "../components/workspace/WorkspaceStats";
+import WorkspaceOverview from "../components/workspace/WorkspaceOverview";
+import WorkspaceMembers from "../components/workspace/WorkspaceMembers";
+import WorkspaceActivity from "../components/workspace/WorkspaceActivity";
+import WorkspaceSidebar from "../components/workspace/WorkspaceSidebar";
 
 export default function Workspace() {
 
@@ -18,105 +21,51 @@ export default function Workspace() {
 
     useEffect(() => {
 
-        loadWorkspace();
+        async function loadWorkspace() {
 
-    }, []);
+            try {
 
-    async function loadWorkspace() {
+                const data = await getWorkspaceOverview(projectId);
 
-        try {
+                setWorkspace(data);
 
-            console.log("Project ID:", projectId);
+            } catch (error) {
 
-            const data = await getWorkspaceOverview(projectId);
+                console.error(error);
 
-            console.log("Workspace Response:", data);
-
-            setWorkspace(data);
-
-        } catch (e) {
-
-            console.error("Workspace Error:", e);
+            }
 
         }
 
-    }
-    if (!workspace)
-        return <Typography>Loading...</Typography>;
+        loadWorkspace();
 
+    }, [projectId]);
     return (
 
-        <Box p={4}>
+        <Box sx={{ p: 4 }}>
 
-            <Typography variant="h4" gutterBottom>
+            <WorkspaceHeader workspace={workspace} />
 
-                {workspace.projectName}
+            <WorkspaceTabs />
 
-            </Typography>
+            <WorkspaceStats workspace={workspace} />
 
-            <Typography>
+            <Grid container spacing={3} sx={{ mt: 1 }}>
 
-                Project Owner
+                <Grid item xs={12} lg={8}>
 
-            </Typography>
+                    <WorkspaceOverview workspace={workspace} />
 
-            <Typography>
+                    <WorkspaceMembers />
 
-                {workspace.manager}
+                    <WorkspaceActivity />
 
-            </Typography>
-
-            <br/>
-
-            <Typography>
-
-                Progress
-
-            </Typography>
-
-            <LinearProgress
-                variant="determinate"
-                value={workspace.progress}
-            />
-
-            <br/>
-
-            <Grid container spacing={3}>
-
-                <Grid item xs={3}>
-                    <Paper sx={{p:3}}>
-                        <Typography>Total Tasks</Typography>
-                        <Typography variant="h4">
-                            {workspace.totalTasks}
-                        </Typography>
-                    </Paper>
                 </Grid>
 
-                <Grid item xs={3}>
-                    <Paper sx={{p:3}}>
-                        <Typography>Completed</Typography>
-                        <Typography variant="h4">
-                            {workspace.completedTasks}
-                        </Typography>
-                    </Paper>
-                </Grid>
+                <Grid item xs={12} lg={4}>
 
-                <Grid item xs={3}>
-                    <Paper sx={{p:3}}>
-                        <Typography>Pending</Typography>
-                        <Typography variant="h4">
-                            {workspace.pendingTasks}
-                        </Typography>
-                    </Paper>
-                </Grid>
+                    <WorkspaceSidebar />
 
-                <Grid item xs={3}>
-                    <Paper sx={{p:3}}>
-                        <Typography>Risk</Typography>
-                        <Typography variant="h4">
-                            {workspace.risk}
-                        </Typography>
-                    </Paper>
                 </Grid>
 
             </Grid>
