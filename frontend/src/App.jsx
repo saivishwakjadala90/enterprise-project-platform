@@ -6,6 +6,7 @@ import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
 import Notifications from "./pages/Notifications";
 import AICopilot from "./pages/AICopilot";
+import Workspace from "./pages/Workspace";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/tasks" element={<Tasks />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/ai-copilot" element={<AICopilot />} />
+                <Route path="/workspace/:projectId" element={<Workspace />} />
             </Routes>
         </BrowserRouter>
     );

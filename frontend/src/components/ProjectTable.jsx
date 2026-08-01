@@ -6,11 +6,15 @@ import {
     TableHead,
     TableRow,
     Paper,
-    IconButton
+    IconButton,
+    Tooltip
 } from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 import StatusChip from "./StatusChip";
 import PriorityChip from "./PriorityChip";
@@ -21,25 +25,21 @@ function ProjectTable({
                           deleteProject
                       }) {
 
+    const navigate = useNavigate();
+
     return (
-
         <TableContainer component={Paper}>
-
             <Table>
 
                 <TableHead>
-
                     <TableRow>
-
                         <TableCell>ID</TableCell>
                         <TableCell>Project Name</TableCell>
                         <TableCell>Status</TableCell>
                         <TableCell>Priority</TableCell>
                         <TableCell>Owner</TableCell>
-                        <TableCell>Actions</TableCell>
-
+                        <TableCell align="center">Actions</TableCell>
                     </TableRow>
-
                 </TableHead>
 
                 <TableBody>
@@ -62,21 +62,34 @@ function ProjectTable({
 
                             <TableCell>{project.ownerEmail}</TableCell>
 
-                            <TableCell>
+                            <TableCell align="center">
 
-                                <IconButton
-                                    color="primary"
-                                    onClick={() => editProject(project)}
-                                >
-                                    <EditIcon />
-                                </IconButton>
+                                <Tooltip title="Edit Project">
+                                    <IconButton
+                                        color="primary"
+                                        onClick={() => editProject(project)}
+                                    >
+                                        <EditIcon />
+                                    </IconButton>
+                                </Tooltip>
 
-                                <IconButton
-                                    color="error"
-                                    onClick={() => deleteProject(project.id)}
-                                >
-                                    <DeleteIcon />
-                                </IconButton>
+                                <Tooltip title="Delete Project">
+                                    <IconButton
+                                        color="error"
+                                        onClick={() => deleteProject(project.id)}
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </Tooltip>
+
+                                <Tooltip title="Open Workspace">
+                                    <IconButton
+                                        color="success"
+                                        onClick={() => navigate(`/workspace/${project.id}`)}
+                                    >
+                                        <LaunchIcon />
+                                    </IconButton>
+                                </Tooltip>
 
                             </TableCell>
 
@@ -87,11 +100,8 @@ function ProjectTable({
                 </TableBody>
 
             </Table>
-
         </TableContainer>
-
     );
-
 }
 
 export default ProjectTable;
