@@ -24,12 +24,23 @@ export default function Workspace() {
 
     async function loadWorkspace() {
 
-        const data = await getWorkspaceOverview(projectId);
+        try {
 
-        setWorkspace(data);
+            console.log("Project ID:", projectId);
+
+            const data = await getWorkspaceOverview(projectId);
+
+            console.log("Workspace Response:", data);
+
+            setWorkspace(data);
+
+        } catch (e) {
+
+            console.error("Workspace Error:", e);
+
+        }
 
     }
-
     if (!workspace)
         return <Typography>Loading...</Typography>;
 
