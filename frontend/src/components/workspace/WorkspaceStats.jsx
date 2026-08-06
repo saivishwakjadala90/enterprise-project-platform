@@ -46,6 +46,10 @@ function StatCard({ title, value, icon }) {
 
 export default function WorkspaceStats({ workspace }) {
 
+    if (!workspace) {
+        return null;
+    }
+
     return (
 
         <Grid container spacing={3} mt={1}>
