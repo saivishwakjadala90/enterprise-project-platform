@@ -57,6 +57,26 @@ export default function Workspace() {
             <WorkspaceMembers />
 
             <WorkspaceActivity />
+
+            <Grid container spacing={3} sx={{ mt: 1 }}>
+
+                <Grid item xs={12} lg={8}>
+
+                    <WorkspaceOverview workspace={workspace} />
+
+                    <WorkspaceMembers />
+
+                    <WorkspaceActivity />
+
+                </Grid>
+
+                <Grid item xs={12} lg={4}>
+
+                    <WorkspaceSidebar />
+
+                </Grid>
+
+            </Grid>
         </Box>
     );
 
