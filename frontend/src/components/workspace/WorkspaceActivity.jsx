@@ -79,7 +79,7 @@ export default function WorkspaceActivity() {
 
                                     primary={activity.type}
 
-                                    secondary={activity.description}
+                                    secondary={activity.message}
 
                                 />
 
