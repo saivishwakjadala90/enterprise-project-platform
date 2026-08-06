@@ -41,40 +41,31 @@ export default function Workspace() {
 
     }, [projectId]);
     return (
-
         <Box sx={{ p: 4 }}>
-
             <WorkspaceHeader workspace={workspace} />
+
+            <h1 style={{ color: "red" }}>AFTER HEADER</h1>
 
             <WorkspaceTabs />
 
+            <h1 style={{ color: "blue" }}>AFTER TABS</h1>
+
             <WorkspaceStats workspace={workspace} />
 
+            <h1 style={{ color: "green" }}>AFTER STATS</h1>
+
             <Grid container spacing={3} sx={{ mt: 1 }}>
-
                 <Grid item xs={12} lg={8}>
-
                     <WorkspaceOverview workspace={workspace} />
-
-                     <WorkspaceMembers />
-
-                     <WorkspaceActivity />
-
+                    <WorkspaceMembers />
+                    <WorkspaceActivity />
                 </Grid>
 
-
-
-    <Grid item xs={12} lg={4}>
-
-        <WorkspaceSidebar />
-
-    </Grid>
-
-
+                <Grid item xs={12} lg={4}>
+                    <WorkspaceSidebar />
+                </Grid>
             </Grid>
-
         </Box>
-
     );
 
 }
