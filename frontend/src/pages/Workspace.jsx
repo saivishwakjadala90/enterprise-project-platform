@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Box,  Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 import { getWorkspaceOverview } from "../services/workspaceService";
 
@@ -40,19 +40,16 @@ export default function Workspace() {
         loadWorkspace();
 
     }, [projectId]);
+
     return (
+
         <Box sx={{ p: 4 }}>
+
             <WorkspaceHeader workspace={workspace} />
 
             <WorkspaceTabs />
 
             <WorkspaceStats workspace={workspace} />
-
-            <WorkspaceOverview workspace={workspace} />
-
-            <WorkspaceMembers />
-
-            <WorkspaceActivity />
 
             <Grid container spacing={3} sx={{ mt: 1 }}>
 
@@ -73,7 +70,9 @@ export default function Workspace() {
                 </Grid>
 
             </Grid>
+
         </Box>
+
     );
 
 }
