@@ -52,6 +52,11 @@ export default function Workspace() {
             <WorkspaceOverview workspace={workspace} />
 
             <WorkspaceMembers />
+            <WorkspaceOverview workspace={workspace} />
+
+            <WorkspaceMembers />
+
+            <WorkspaceActivity />
         </Box>
     );
 
