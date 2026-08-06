@@ -59,7 +59,7 @@ export default function Workspace() {
 
                     <WorkspaceMembers />
 
-                    <WorkspaceActivity />
+                    {/*<WorkspaceActivity />*/}
 
                 </Grid>
 
