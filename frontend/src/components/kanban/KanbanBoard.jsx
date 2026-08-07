@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { getKanbanBoard } from "../../services/kanbanService";
-import KanbanColumn from "./KanbanColumn";
+import KanbanColumn from "./kanbanColumn";
 
 export default function KanbanBoard() {
 
@@ -12,24 +12,26 @@ export default function KanbanBoard() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        loadBoard();
-    }, [projectId]);
 
-    async function loadBoard() {
+        async function loadBoard() {
 
-        try {
+            try {
 
-            const data = await getKanbanBoard(projectId);
+                const data = await getKanbanBoard(projectId);
 
-            setTasks(data);
+                setTasks(data);
 
-        } catch (error) {
+            } catch (error) {
 
-            console.error(error);
+                console.error(error);
+
+            }
 
         }
 
-    }
+        loadBoard();
+
+    }, [projectId]);
 
     return (
 
