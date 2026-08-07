@@ -19,6 +19,8 @@ export default function KanbanBoard() {
 
                 const data = await getKanbanBoard(projectId);
 
+                console.log("KANBAN DATA:", data);
+
                 setTasks(data);
 
             } catch (error) {
