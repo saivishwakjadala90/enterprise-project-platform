@@ -3,7 +3,7 @@ import {
     Typography
 } from "@mui/material";
 
-import KanbanCard from "./KanbanCard";
+import KanbanCard from "./KanbanCard.jsx";
 
 export default function KanbanColumn({
 
