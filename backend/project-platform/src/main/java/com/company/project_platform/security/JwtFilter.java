@@ -73,6 +73,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
             String email = claims.getSubject();
             String role = claims.get("role", String.class);
+            System.out.println("========== JWT DEBUG ==========");
+            System.out.println("Email : " + email);
+            System.out.println("Role  : " + role);
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
