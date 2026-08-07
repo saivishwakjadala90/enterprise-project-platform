@@ -3,24 +3,24 @@ package com.company.project_platform.dto;
 public class KanbanTaskDTO {
 
     private Long id;
-    private String title;
+    private String taskName;
     private String priority;
-    private String assignee;
+    private String assignedTo;
     private String status;
 
     public KanbanTaskDTO() {
     }
 
     public KanbanTaskDTO(Long id,
-                         String title,
+                         String taskName,
                          String priority,
-                         String assignee,
+                         String assignedTo,
                          String status) {
 
         this.id = id;
-        this.title = title;
+        this.taskName = taskName;
         this.priority = priority;
-        this.assignee = assignee;
+        this.assignedTo = assignedTo;
         this.status = status;
     }
 
@@ -28,16 +28,16 @@ public class KanbanTaskDTO {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTaskName() {
+        return taskName;
     }
 
     public String getPriority() {
         return priority;
     }
 
-    public String getAssignee() {
-        return assignee;
+    public String getAssignedTo() {
+        return assignedTo;
     }
 
     public String getStatus() {
@@ -48,16 +48,16 @@ public class KanbanTaskDTO {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
     public void setPriority(String priority) {
         this.priority = priority;
     }
 
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
     }
 
     public void setStatus(String status) {
