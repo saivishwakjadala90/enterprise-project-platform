@@ -144,6 +144,30 @@ public class TaskController {
         }).orElse(null);
     }
 
+    @PutMapping("/{id}/status")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
+    public Task updateTaskStatus(
+            @PathVariable Long id,
+            @RequestParam String status
+    ) {
+
+        return taskRepository.findById(id).map(task -> {
+
+            task.setStatus(status);
+
+            Task updatedTask = taskRepository.save(task);
+
+            activityLogService.createActivity(
+                    "TASK",
+                    "Moved task '" + updatedTask.getTaskName() + "' to " + status
+            );
+
+            return updatedTask;
+
+        }).orElse(null);
+
+    }
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteTask(@PathVariable Long id) {

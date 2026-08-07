@@ -12,12 +12,15 @@ import WorkspaceOverview from "../components/workspace/WorkspaceOverview";
 import WorkspaceMembers from "../components/workspace/WorkspaceMembers";
 import WorkspaceActivity from "../components/workspace/WorkspaceActivity";
 import WorkspaceSidebar from "../components/workspace/WorkspaceSidebar";
+import KanbanBoard from "../components/kanban/KanbanBoard";
 
 export default function Workspace() {
 
     const { projectId } = useParams();
 
     const [workspace, setWorkspace] = useState(null);
+
+    const [tab, setTab] = useState(0);
 
     useEffect(() => {
 
@@ -47,29 +50,42 @@ export default function Workspace() {
 
             <WorkspaceHeader workspace={workspace} />
 
-            <WorkspaceTabs />
+            <WorkspaceTabs
+                value={tab}
+                onChange={setTab}
+            />
 
             <WorkspaceStats workspace={workspace} />
 
-            <Grid container spacing={3} sx={{ mt: 1 }}>
+            {tab === 0 && (
 
-                <Grid item xs={12} lg={8}>
+                <Grid container spacing={3} sx={{ mt: 1 }}>
 
-                    <WorkspaceOverview workspace={workspace} />
+                    <Grid item xs={12} lg={8}>
 
-                    <WorkspaceMembers />
+                        <WorkspaceOverview workspace={workspace} />
 
-                    <WorkspaceActivity />
+                        <WorkspaceMembers />
+
+                        <WorkspaceActivity />
+
+                    </Grid>
+
+                    <Grid item xs={12} lg={4}>
+
+                        <WorkspaceSidebar />
+
+                    </Grid>
 
                 </Grid>
 
-                <Grid item xs={12} lg={4}>
+            )}
 
-                    <WorkspaceSidebar />
+            {tab === 1 && (
 
-                </Grid>
+                <KanbanBoard />
 
-            </Grid>
+            )}
 
         </Box>
 
