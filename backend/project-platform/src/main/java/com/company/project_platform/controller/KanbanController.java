@@ -2,13 +2,14 @@ package com.company.project_platform.controller;
 
 import com.company.project_platform.dto.KanbanTaskDTO;
 import com.company.project_platform.service.KanbanService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/kanban")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class KanbanController {
 
     private final KanbanService kanbanService;
@@ -18,9 +19,12 @@ public class KanbanController {
     }
 
     @GetMapping("/{projectId}")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
     public List<KanbanTaskDTO> getBoard(
             @PathVariable Long projectId) {
 
         return kanbanService.getBoard(projectId);
+
     }
+
 }
